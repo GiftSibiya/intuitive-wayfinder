@@ -1,0 +1,15 @@
+{
+  "name": "intuitive-wayfinding",
+  "version": "1.0.0",
+  "description": "offline wayfinding for intuitive workspaces",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "d3": "^7.9.0",
+    "qrcode": "^1.5.4"
+  }
+}

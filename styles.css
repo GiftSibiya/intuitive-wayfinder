@@ -1,0 +1,35 @@
+:root {
+    --bg-color: #ffffff;
+    --text-color: #000000;
+    --button-bg: #007bff;
+    --button-text: #ffffff;
+    --app-background: #32313d;
+    --app-darkBlue: #282737;
+    --app-orange: #EC681A;
+}
+
+/* Dark Theme */
+[data-theme="dark"] {
+    --bg-color: #121212;
+    --text-color: #ffffff;
+    --button-bg: #ff4081;
+    --button-text: #000000;
+}
+
+
+body {
+  width: 100%;
+  height: 100%;
+  font-family: Arial, sans-serif;
+  text-align: center;
+  background-color: var(--app-background);
+  margin: 0;
+}
+textarea {
+  width: 80%;
+  height: 100px;
+}
+button {
+  display: block;
+  margin: 10px auto;
+}
