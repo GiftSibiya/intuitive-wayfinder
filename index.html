@@ -7,24 +7,17 @@
     <title>Offline Static Website</title>
 </head>
 <body>
+    <h1>Welcome to My Offline Page</h1>
     <p id="content">This site will save content for offline use.</p>
-    <p id="status">Checking online status...</p>
 
     <button onclick="saveContent()">Save Content for Offline Use</button>
 
     <!-- Placeholder for the PortraitWayfinder component -->
     <div id="wayfinder-container"></div>
 
-    <!-- Import the external JavaScript files -->
-    <script src="app.js"></script>
+    <!-- Include the PortraitWayfinder.js first so that it's loaded into the global scope -->
     <script src="src/components/PortraitWayfinder.js"></script>
-
-    <script>
-        window.onload = function() {
-            loadOfflineContent();
-            const container = document.getElementById('wayfinder-container');
-            renderPortraitWayfinder(container);
-        };
-    </script>
+    <!-- Include the app.js which will now use the globally accessible renderPortraitWayfinder function -->
+    <script src="app.js"></script>
 </body>
 </html>

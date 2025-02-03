@@ -1,6 +1,5 @@
 // app.js
 
-
 // Function to save content when online
 function saveContent() {
   const content = document.getElementById('content').innerHTML;
@@ -11,21 +10,22 @@ function saveContent() {
 // Function to load cached content when offline
 function loadOfflineContent() {
   if (!navigator.onLine) { // Detect offline mode
-      document.getElementById('status').innerText = "You're offline. Showing saved content.";
-      document.getElementById('status').style.color = "red";
-
       const savedContent = localStorage.getItem('offlineContent');
       if (savedContent) {
           document.getElementById('content').innerHTML = savedContent;
       } else {
           document.getElementById('content').innerHTML = "No offline content available.";
       }
-  } else {
-      document.getElementById('status').innerText = "You're online.";
-      document.getElementById('status').style.color = "green";
   }
 }
 
 // Expose functions for use in index.html
 window.saveContent = saveContent;
 window.loadOfflineContent = loadOfflineContent;
+
+// Call the function to render the PortraitWayfinder on load
+window.onload = function() {
+  loadOfflineContent();
+  const container = document.getElementById('wayfinder-container');
+  window.renderPortraitWayfinder(container); // Render PortraitWayfinder globally
+};
