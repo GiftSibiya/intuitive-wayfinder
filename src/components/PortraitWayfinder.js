@@ -35,7 +35,8 @@ async function renderPortraitWayfinder(container, props) {
   floorMapImage.style.width = '65%';
   floorMapImage.style.height = '100%';
   floorMapImage.style.objectFit = 'contain';
-  floorMapImage.style.backgroundColor = 'black';
+  floorMapImage.style.filter = 'invert(1)';
+  floorMapImage.style.backgroundColor = 'transparent';
   floorMapImage.style.color = 'black';
   floorMapContainer.appendChild(floorMapImage);
 
