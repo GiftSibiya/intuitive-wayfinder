@@ -1,20 +1,30 @@
-// Imports
+// app.js
 
-import  PortraitWayfinder  from "./src/components/PortraitWayfinder.js";
+// Function to save content when online
+function saveContent() {
+  const content = document.getElementById('content').innerHTML;
+  localStorage.setItem('offlineContent', content);
+  alert("Content saved for offline use from the app script!");
+}
 
-document.addEventListener("DOMContentLoaded", function () {
-  const app = document.getElementById("app");
+// Function to load cached content when offline
+function loadOfflineContent() {
+  if (!navigator.onLine) { // Detect offline mode
+      document.getElementById('status').innerText = "You're offline. Showing saved content.";
+      document.getElementById('status').style.color = "red";
 
-
-  if (app) {
-    const wayfinder = new PortraitWayfinder(app);
-    wayfinder.init();
+      const savedContent = localStorage.getItem('offlineContent');
+      if (savedContent) {
+          document.getElementById('content').innerHTML = savedContent;
+      } else {
+          document.getElementById('content').innerHTML = "No offline content available.";
+      }
+  } else {
+      document.getElementById('status').innerText = "You're online.";
+      document.getElementById('status').style.color = "green";
   }
+}
 
-    // Register service worker
-    if ("serviceWorker" in navigator) {
-      navigator.serviceWorker.register("src/js/service-worker.js")
-      .then(() => console.log("Service Worker Registered"))
-      .catch(err => console.error("Service Worker Error:", err));
-    }
-});
+// Expose functions for use in index.html
+window.saveContent = saveContent;
+window.loadOfflineContent = loadOfflineContent;

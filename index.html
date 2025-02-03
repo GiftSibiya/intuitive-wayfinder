@@ -3,11 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Intuitive Wayfinding</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Offline Static Website</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+        #status {
+            color: green;
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
-  <div id="app"></div>
-  <script src="app.js" type="module" defer></script>
+    <h1>Welcome to My Offline Page</h1>
+    <p id="content">This site will save content for offline use.</p>
+    <p id="status">Checking online status...</p>
+
+    <button onclick="saveContent()">Save Content for Offline Use</button>
+
+    <!-- Import the external JavaScript file -->
+    <script src="app.js"></script>
+
+    <script>
+        // Run the function to load offline content when page loads
+        window.onload = loadOfflineContent;
+    </script>
 </body>
 </html>
