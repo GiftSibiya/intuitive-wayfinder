@@ -188,12 +188,46 @@ async function renderPortraitWayfinder(container, props) {
 
   // Access the global sensorData object
   if (window.sensorData && window.sensorData.sensors) {
-    window.sensorData.sensors.forEach(sensor => {
+    window.sensorData.sensors
+      .sort((a, b) => a.room_no - b.room_no)
+      .forEach(sensor => {
+
+      const sensorListItem = document.createElement('div');
+      sensorListItem.id = 'wayfinder-sensorListItem';
+      sensorListItem.style.display = 'flex';
+      sensorListItem.style.flexDirection = 'row';
+      sensorListItem.style.width = '100%';
+      sensorListItem.style.height = '50px';
+      sensorListItem.style.borderColor = '1px solid red';
+      
+      sensorList.appendChild(sensorListItem);
+      
+      const sensorNumber = document.createElement('div');
+      sensorNumber.textContent = sensor.room_no; 
+      sensorNumber.id = 'wayfinder-sensorNumber';
+      sensorNumber.style.backgroundColor = 'red';
+      sensorNumber.style.display = 'flex';
+      sensorNumber.style.justifyContent = 'center';
+      sensorNumber.style.alignItems = 'center';
+      sensorNumber.style.width = '20px';
+      sensorNumber.style.height = '20px';
+      sensorNumber.style.color = 'white';
+      sensorNumber.style.borderRadius = '100%';
+      sensorListItem.appendChild(sensorNumber);
+
       const sensorItem = document.createElement('div');
       sensorItem.id = 'wayfinder-sensorItem';
       sensorItem.textContent = sensor.name;
       sensorItem.style.color = 'white';
-      sensorList.appendChild(sensorItem);
+      sensorItem.style.display = 'flex';
+      sensorItem.style.flexDirection = 'row';
+      sensorItem.style.width = '80%';
+      sensorItem.style.height = '100px';
+      sensorListItem.appendChild(sensorItem);
+
+
+
+      
     });
   } else {
     console.error("sensorData is not defined or missing 'sensors'");
