@@ -3,32 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
     <title>Offline Static Website</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            padding: 20px;
-        }
-        #status {
-            color: green;
-            font-weight: bold;
-        }
-    </style>
 </head>
 <body>
-    <h1>Welcome to My Offline Page</h1>
     <p id="content">This site will save content for offline use.</p>
     <p id="status">Checking online status...</p>
 
     <button onclick="saveContent()">Save Content for Offline Use</button>
 
-    <!-- Import the external JavaScript file -->
+    <!-- Placeholder for the PortraitWayfinder component -->
+    <div id="wayfinder-container"></div>
+
+    <!-- Import the external JavaScript files -->
     <script src="app.js"></script>
+    <script src="src/components/PortraitWayfinder.js"></script>
 
     <script>
-        // Run the function to load offline content when page loads
-        window.onload = loadOfflineContent;
+        window.onload = function() {
+            loadOfflineContent();
+            const container = document.getElementById('wayfinder-container');
+            renderPortraitWayfinder(container);
+        };
     </script>
 </body>
 </html>

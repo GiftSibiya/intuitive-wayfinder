@@ -1,5 +1,6 @@
 // app.js
 
+
 // Function to save content when online
 function saveContent() {
   const content = document.getElementById('content').innerHTML;
