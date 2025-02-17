@@ -4,7 +4,8 @@
 window.onload = function() {
   const container = document.getElementById('wayfinder-container');
   container.style.width = '100vw';
-  container.style.height = '100vh';
+  container.style.height = '99vh';
+  container.style.margin = '0';
   const props = {
     floors: [],
     floor: {},
