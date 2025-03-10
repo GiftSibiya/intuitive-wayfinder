@@ -33,6 +33,35 @@ async function renderPortraitWayfinder(container, props) {
 
     floorMapContainer.appendChild(sensorPic);
 
+    const existingSelectedRoomName = document.getElementById('selected-room-name');
+    if (existingSelectedRoomName) {
+      existingSelectedRoomName.remove();
+    };
+
+
+    const selectedRoomName = document.createElement('div');
+    selectedRoomName.id = 'selected-room-name';
+    selectedRoomName.style.color = 'white';
+    selectedRoomName.style.fontSize = '1.5rem';
+    selectedRoomName.style.fontWeight = 'bold';
+    selectedRoomName.innerHTML = `Selected Room: ${sensor.name} <br/> Room Status: ${sensor.sensor_state}`;
+    qrCodeSection.appendChild(selectedRoomName);
+
+    const existingQrImage = document.getElementById('qr-image'); // Remove Existing QR Image
+    if (existingQrImage) {
+      existingQrImage.remove();
+    };
+
+    const qrImage = document.createElement('img');
+    qrImage.id = 'qr-image';
+    qrImage.src = `./src/assets/images/qrCodes/${sensor.name}.png`;
+    qrImage.style.width = '80%';
+    qrImage.style.height = '80%';
+    qrImage.style.objectFit = 'contain';
+
+    qrCodeSection.appendChild(qrImage)
+
+
     wayfindTimeout = setTimeout(() => { // Start a new timeout
       if (document.getElementById('sensor-overlay')) {
         document.getElementById('sensor-overlay').remove();
@@ -383,7 +412,6 @@ async function renderPortraitWayfinder(container, props) {
   qrCodeSection.style.flexDirection = 'column';
   qrCodeSection.style.alignItems = 'center';
   qrCodeSection.style.justifyContent = 'center';
-  qrCodeSection.style.backgroundColor = '#32313d';
   bottomContainer.appendChild(qrCodeSection);
 
   // ========== ========== //
