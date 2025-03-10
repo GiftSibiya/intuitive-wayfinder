@@ -4,7 +4,9 @@ async function renderPortraitWayfinder(container, props) {
   // ========== Variables ========== //
 
   let wayfindTimeout; // Wayfinding Screen Timeout
-
+  let BUILDING_DATA = window.sensorData;
+  let SENSOR_DATA = window.sensorData.sensors.filter(sensor => sensor.sensor_state !== 'legend');
+  let LEGEND_DATA = window.sensorData.sensors.filter(sensor => sensor.sensor_state === 'legend');
   // ========== Functions ========== //
 
   const handleSensorClick = (sensor) => {
@@ -67,7 +69,9 @@ async function renderPortraitWayfinder(container, props) {
   };
 
   const filterSensors = (query) => {
-    const filteredSensors = window.sensorData.sensors.filter(sensor =>
+    let sensotData = SENSOR_DATA;
+
+    const filteredSensors = sensotData.sensors.filter(sensor =>
       sensor.name.toLowerCase().includes(query.toLowerCase())
     );
     updateSensorList(filteredSensors);
@@ -76,6 +80,9 @@ async function renderPortraitWayfinder(container, props) {
   const updateSensorList = (sensors) => {
     sensorList.innerHTML = ''; // Clear the existing list
     sensors.forEach(sensor => {
+
+
+
       const sensorListItem = document.createElement('div');
       sensorListItem.id = 'wayfinder-sensorListItem';
       sensorListItem.style.display = 'flex';
@@ -112,6 +119,7 @@ async function renderPortraitWayfinder(container, props) {
       sensorItem.style.marginLeft = '12px';
       sensorItem.style.height = '45px';
       sensorListItem.appendChild(sensorItem);
+
     });
   };
 
@@ -146,10 +154,9 @@ async function renderPortraitWayfinder(container, props) {
   floorMapContainer.style.height = '100%';
   topContainer.appendChild(floorMapContainer);
 
-  if (window.sensorData) {
-    console.log(window.sensorData)
+  if (BUILDING_DATA) {
     const floorMapImage = document.createElement('img');
-    floorMapImage.src = `./src/assets/images/${window.sensorData.floor_plan_url}`;
+    floorMapImage.src = `./src/assets/images/${BUILDING_DATA.floor_plan_url}`;
     floorMapImage.style.width = '65%';
     floorMapImage.style.height = '100%';
     floorMapImage.style.objectFit = 'contain';
@@ -204,8 +211,8 @@ async function renderPortraitWayfinder(container, props) {
 
   legendWrapper.appendChild(legendText);
 
-  if (window.sensorData && window.sensorData.legends) {
-    window.sensorData.legends.forEach(legend => {
+  if (BUILDING_DATA && LEGEND_DATA) {
+    LEGEND_DATA.forEach(legend => {
       const legendItem = document.createElement('div');
       legendItem.style.display = 'flex';
       legendItem.style.alignItems = 'center';
@@ -215,8 +222,8 @@ async function renderPortraitWayfinder(container, props) {
       legendItem.style.fontWeight = '500';
       legendItem.style.cursor = 'pointer';
       legendItem.style.borderRadius = '20px';
-
-      legendItem.innerHTML = legend.name;
+      legendItem.innerHTML = legend.parent_id;
+      legendItem.addEventListener('click', () => handleSensorClick(legend));
 
       legendWrapper.appendChild(legendItem);
     });
@@ -246,7 +253,7 @@ async function renderPortraitWayfinder(container, props) {
 
   const sensorTitleText = document.createElement('div');
   sensorTitleText.id = 'wayfinder-sensorTitleText';
-  sensorTitleText.textContent = `Floor: ${window.sensorData.number} `;
+  sensorTitleText.textContent = `Floor: ${BUILDING_DATA.number} `;
   sensorTitleText.style.width = '20%';
   sensorTitleText.style.color = 'white';
   sensorTitleText.style.fontWeight = 'bold';
@@ -330,7 +337,6 @@ async function renderPortraitWayfinder(container, props) {
   searchInput.style.color = '#ffffff';
   searchInput.style.fontSize = '16px';
   searchInput.style.textAlign = 'left';
-
   searchInput.style.outline = 'none';
   searchInput.style.caretColor = '#ffffff';
 
@@ -364,8 +370,8 @@ async function renderPortraitWayfinder(container, props) {
   sensorList.style.transition = 'background-color 200ms';
   sensorContainer.appendChild(sensorList);
 
-  if (window.sensorData && window.sensorData.sensors) { // Access the global sensorData object
-    window.sensorData.sensors
+  if (BUILDING_DATA && SENSOR_DATA) { // Access the global sensorData object
+    SENSOR_DATA
       .sort((a, b) => a.room_no - b.room_no)
       .forEach(sensor => {
 
