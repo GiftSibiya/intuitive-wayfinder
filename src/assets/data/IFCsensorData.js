@@ -1,5 +1,5 @@
 // sensorData.js
-window.sensorData = 
+window.sensorData =
 
 {
   "size_sqft": "58706.39",
@@ -394,7 +394,7 @@ window.sensorData =
       "boothSensor": false
     }
   ],
-  "legends":[
+  "legends": [
     {
       "id": "7d73d01f-038d-083h-8637-ua027bfks87a",
       "name": "Men's Restroom",
