@@ -22,9 +22,9 @@ const handleSensorClick = (sensor) => {
     sensorPic.src = `./src/assets/images/plans/${sensor.name}.png`;
     sensorPic.id = 'sensor-overlay';
     sensorPic.style.position = 'absolute';
-    sensorPic.style.top = '100%'; 
+    sensorPic.style.top = '100%';
     sensorPic.style.left = '50%';
-    sensorPic.style.transform = 'translate(-50%, -99%)'; // translate(X position, Y position) 
+    sensorPic.style.transform = 'translate(-50%, -99%)'; // translate(X position, Y position)
     sensorPic.style.width = '65%';
     sensorPic.style.height = '100%';
     sensorPic.style.objectFit = 'contain';
@@ -46,7 +46,7 @@ const handleSensorClick = (sensor) => {
 // ========== ========== //
 
 // ========== UI COMPONENTS ========== //
-  
+
   const mainContainer = document.createElement('div');
   mainContainer.id = 'wayfinder-mainContainer';
   mainContainer.style.width = '100%';
@@ -57,6 +57,8 @@ const handleSensorClick = (sensor) => {
   container.appendChild(mainContainer);
 
   // ----- Top Container ----- //
+
+
 
   const topContainer = document.createElement('div');
   topContainer.id = 'wayfinder-topContainer';
@@ -85,7 +87,7 @@ const handleSensorClick = (sensor) => {
   floorMapContainer.appendChild(floorMapImage);
 
   // -----  ----- //
-  
+
   const bottomContainer = document.createElement('div');
   bottomContainer.id = 'wayfinder-bottomContainer';
   bottomContainer.style.display = 'flex';
@@ -97,41 +99,73 @@ const handleSensorClick = (sensor) => {
   //----- Sensor Container ----- //
 
   // Lenegd Container
-  const legendContainer = document.createElement('div');
-  legendContainer.id = 'wayfinder-legendContainer';
-  legendContainer.style.width = '10%';
-  legendContainer.style.height = '100%';
-  bottomContainer.appendChild(legendContainer);
+// ----- Legend Container ----- //
 
-  const lengendText = document.createElement('h3');
-  lengendText.textContent = 'Legend';
-  lengendText.style.flex = 'flex';
-  lengendText.style.color = 'white';
-  lengendText.style.fontSize = '14px';
-  lengendText.style.alignSelf = 'flex-start';
-  legendContainer.appendChild(lengendText);
+const legendContainer = document.createElement('div');
+legendContainer.id = 'wayfinder-legendContainer';
+legendContainer.style.width = '10%';
+legendContainer.style.height = '100%';
+legendContainer.style.backgroundColor = '#211f20';
+legendContainer.style.padding = '1vh';
+legendContainer.style.overflow = 'auto';
+legendContainer.style.display = 'flex';
+legendContainer.style.flexDirection = 'column';
 
-  if (window.sensorData && window.sensorData.legends) {
-    window.sensorData.legends.forEach( legend => {
+bottomContainer.appendChild(legendContainer);
 
-      const legendItem = document.createElement('div');
-      legendItem.style.display = 'flex';
-      legendItem.style.width = '100%';
-      legendItem.style.height = '25px';
-      legendItem.style.justifyContent = 'start';
-      legendItem.style.color = 'white';
-      legendItem.style.fontSize = '12px';
-      legendItem.style.cursor = 'pointer';
-      legendItem.innerHTML = legend.name;
 
-      legendContainer.appendChild(legendItem);
+const legendWrapper = document.createElement('div');
+legendWrapper.style.display = 'flex';
+legendWrapper.style.flexDirection = 'column';
+legendWrapper.style.gap = '0.77vh';
+legendWrapper.style.flex = '1';
+legendWrapper.style.padding = '1vh';
+legendWrapper.style.overflow = 'auto';
+legendWrapper.style.backgroundColor = '#32313d';
+legendWrapper.style.borderTopRightRadius = '10px';
+legendWrapper.style.borderBottomRightRadius = '10px';
 
-      }
-    )
-  
-  }
 
-  // 
+const legendText = document.createElement('h3');
+legendText.textContent = 'Legend';
+legendText.style.padding = '1vh';
+legendText.style.fontSize = '1.5vh';
+legendText.style.fontWeight = '500';
+legendText.style.color = 'white';
+legendText.style.alignSelf = 'flex-start';
+
+
+legendWrapper.appendChild(legendText);
+
+if (window.sensorData && window.sensorData.legends) {
+  window.sensorData.legends.forEach(legend => {
+    const legendItem = document.createElement('div');
+    legendItem.style.display = 'flex';
+    legendItem.style.alignItems = 'center';
+    legendItem.style.gap = '0.7vh';
+    legendItem.style.color = 'white';
+    legendItem.style.fontSize = '1vh';
+    legendItem.style.fontWeight = '500';
+    legendItem.style.cursor = 'pointer';
+    legendItem.style.borderRadius = '20px';
+    legendItem.style.padding = '2px';
+
+    legendItem.innerHTML = legend.name;
+
+    legendWrapper.appendChild(legendItem);
+  });
+}
+
+
+legendContainer.appendChild(legendWrapper);
+
+// -----  ----- //
+
+//   const titleImage = document.createElement('img');
+//   titleImage.src = './src/assets/images/logos/the-world-bank-logo.png';
+//   titleImage.style.width = '50px';
+//   sensorTitleContainer.appendChild(titleImage);
+
 
   const sensorContainer = document.createElement('div');
   sensorContainer.id = 'wayfinder-sensorContainer';
@@ -149,86 +183,120 @@ const handleSensorClick = (sensor) => {
   sensorTitleContainer.style.justifyContent = 'space-beween';
   sensorTitleContainer.style.alignItems = 'center';
   sensorContainer.appendChild(sensorTitleContainer);
-  
-  const titleImage = document.createElement('img');
-  titleImage.src = './src/assets/images/logos/the-world-bank-logo.png';
-  titleImage.style.width = '50px';
-  sensorTitleContainer.appendChild(titleImage);
 
-  const sensorTitleText = document.createElement('div');
-  sensorTitleText.id = 'wayfinder-sensorTitleText';
-  sensorTitleText.textContent = 'Floor Map';
-  sensorTitleText.style.width = '20%';
-  sensorTitleText.style.color = 'white';
-  sensorTitleText.style.fontWeight = 'bold';
-  sensorTitleText.style.alignItems = 'center';
-  sensorTitleText.style.justifyContent = 'center';
-  sensorTitleContainer.appendChild(sensorTitleText);
+//   const titleImage = document.createElement('img');
+//   titleImage.src = './src/assets/images/logos/the-world-bank-logo.png';
+//   titleImage.style.width = '50px';
+//   sensorTitleContainer.appendChild(titleImage);
+
+const sensorTitleText = document.createElement('div');
+sensorTitleText.id = 'wayfinder-sensorTitleText';
+sensorTitleText.textContent = 'Floor: 2';
+sensorTitleText.style.width = '20%';
+sensorTitleText.style.color = 'white';
+sensorTitleText.style.fontWeight = 'bold';
+
+
+sensorTitleText.style.display = 'flex';
+sensorTitleText.style.alignItems = 'center';
+sensorTitleText.style.justifyContent = 'flex-start';
+sensorTitleText.style.textAlign = 'left';
+
+sensorTitleContainer.appendChild(sensorTitleText);
+
+
+
 
   //  Time Container
 
   const timeContainer = document.createElement('div');
-  timeContainer.id = 'wayfinder-timeContainer';
-  timeContainer.style.width = '70%';
-  timeContainer.style.height = '100%';
-  timeContainer.style.display = 'flex';
-  timeContainer.style.flexDirection = 'column';
-  timeContainer.style.alignItems = 'end';
-  timeContainer.style.alignSelf = 'flex-end';
-  timeContainer.style.justifyContent = 'center';
-  sensorTitleContainer.appendChild(timeContainer);
+timeContainer.id = 'wayfinder-timeContainer';
+Object.assign(timeContainer.style, {
+  width: '70%',
+  height: '100%',
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'end',
+  alignSelf: 'flex-end',
+  justifyContent: 'center',
+  color: '#ffffff',
+  fontSize: '1vh'
+});
+sensorTitleContainer.appendChild(timeContainer);
 
-  const timeText = document.createElement('div');
-  timeText.id = 'wayfinder-timeText';
-  const hour = new Date().getHours();
-  const ampm = hour >= 12 ? 'pm' : 'am';
-  const hour12 = hour % 12 === 0 ? 12 : hour % 12;
-  timeText.textContent = `${hour12}:${new Date().getMinutes().toString().padStart(2, '0')} ${ampm}`;
-  timeText.style.color = 'white';
-  timeText.style.fontWeight = 'bold';
-  timeText.style.fontSize = '12px';
-  timeText.style.alignItems = 'center';
-  timeText.style.justifyContent = 'center';
-  timeContainer.appendChild(timeText);
+const timeText = document.createElement('div');
+timeText.id = 'wayfinder-timeText';
+const hour = new Date().getHours();
+const ampm = hour >= 12 ? 'pm' : 'am';
+const hour12 = hour % 12 === 0 ? 12 : hour % 12;
+timeText.textContent = `${hour12}:${new Date().getMinutes().toString().padStart(2, '0')} ${ampm}`;
+Object.assign(timeText.style, {
+  color: '#ffffff',
+  fontWeight: 'bold',
+  fontSize: '18px',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center'
+});
+timeContainer.appendChild(timeText);
 
-  const dateText = document.createElement('div');
-  dateText.id = 'wayfinder-dateText';
-  dateText.textContent = new Date().toDateString();
-  dateText.style.color = 'white';
-  dateText.style.fontWeight = 'bold';
-  dateText.style.fontSize = '10px';
-  dateText.style.alignItems = 'center';
-  dateText.style.justifyContent = 'center';
-  timeContainer.appendChild(dateText);
+const dateText = document.createElement('div');
+dateText.id = 'wayfinder-dateText';
+dateText.textContent = new Date().toDateString();
+Object.assign(dateText.style, {
+  color: '#ffffff',
+  fontWeight: 'bold',
+  fontSize: '18px',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center'
+});
+timeContainer.appendChild(dateText);
 
   // -----  ----- //
 
-  // ----- Search Container ----- //
-  
-  const searchContainer = document.createElement('div');
-  searchContainer.id = 'wayfinder-searchContainer';
-  searchContainer.style.width = '100%';
-  searchContainer.style.height = '35px';
-  searchContainer.style.display = 'flex';
-  searchContainer.style.flexDirection = 'column';
-  searchContainer.style.alignItems = 'center';
-  searchContainer.style.justifyContent = 'center';
-  sensorContainer.appendChild(searchContainer);
+// ----- Search Container ----- //
 
-  const searchInput = document.createElement('input');
-  searchInput.id = 'wayfinder-searchInput';
-  searchInput.type = 'text';
-  searchInput.placeholder = 'search room name...';
-  searchInput.style.width = '95%';
-  searchInput.style.height = '100%';
-  searchInput.style.padding = '10px';
-  searchInput.style.border = '1px solid #ccc';
-  searchInput.style.borderRadius = '50px';
-  searchInput.style.backgroundColor = '#32313d';
-  searchInput.style.padding = '5px';
-  searchContainer.appendChild(searchInput);
-  
-  // -----  ----- //
+const searchContainer = document.createElement('div');
+searchContainer.id = 'wayfinder-searchContainer';
+searchContainer.style.width = '100%';
+searchContainer.style.marginBottom = '20px'; // Taken from .layout-map__search
+searchContainer.style.display = 'flex';
+searchContainer.style.flexDirection = 'column';
+searchContainer.style.alignItems = 'center';
+searchContainer.style.justifyContent = 'center';
+
+sensorContainer.appendChild(searchContainer);
+
+const searchInput = document.createElement('input');
+searchInput.id = 'wayfinder-searchInput';
+searchInput.type = 'text';
+searchInput.placeholder = 'Search room name...';
+searchInput.style.width = '95%';
+searchInput.style.height = '35px';
+searchInput.style.padding = '5px';
+searchInput.style.border = '1px solid #ccc';
+searchInput.style.borderRadius = '50px';
+searchInput.style.backgroundColor = '#32313d';
+searchInput.style.color = '#ffffff';
+searchInput.style.fontSize = '16px';
+searchInput.style.textAlign = 'left';
+
+
+searchInput.style.outline = 'none';
+searchInput.style.caretColor = '#ffffff';
+
+searchInput.addEventListener('focus', () => {
+  searchInput.placeholder = '';
+});
+searchInput.addEventListener('blur', () => {
+  searchInput.placeholder = 'Search room name...';
+});
+
+searchContainer.appendChild(searchInput);
+
+// -----  ----- //
+
 
   const sensorList = document.createElement('div');
   sensorList.id = 'wayfinder-sensorList';
@@ -261,9 +329,9 @@ const handleSensorClick = (sensor) => {
         sensorListItem.style.height = '30px';
         sensorListItem.addEventListener('click', () => handleSensorClick(sensor));
         sensorList.appendChild(sensorListItem);
-        
+
         const sensorNumber = document.createElement('div');
-        sensorNumber.textContent = sensor.room_no; 
+        sensorNumber.textContent = sensor.room_no;
         sensorNumber.id = 'wayfinder-sensorNumber';
         sensorNumber.style.backgroundColor = 'red';
         sensorNumber.style.display = 'flex';
@@ -307,7 +375,7 @@ const handleSensorClick = (sensor) => {
         mapSensor.style.cursor = 'pointer';
         mapSensor.style.justifyContent = 'center';
         mapSensor.addEventListener('click', () => handleSensorClick(sensor));
-        floorMapContainer.appendChild(mapSensor); 
+        floorMapContainer.appendChild(mapSensor);
 
       });
   } else {
@@ -317,7 +385,7 @@ const handleSensorClick = (sensor) => {
   // -----  ----- //
 
   // ----- QR Code Container ----- //
-  
+
   const qrCodeSection = document.createElement('div');
   qrCodeSection.id = 'wayfinder-qrCodeSection';
   qrCodeSection.style.width = '20%';
