@@ -29,7 +29,6 @@ async function renderPortraitWayfinder(container, props) {
     sensorPic.style.height = '100%';
     sensorPic.style.objectFit = 'contain';
     sensorPic.style.backgroundColor = 'transparent';
-    sensorPic.style.border = '2px solid #007bff';
     sensorPic.style.pointerEvents = 'none';
 
     floorMapContainer.appendChild(sensorPic);
@@ -90,7 +89,7 @@ async function renderPortraitWayfinder(container, props) {
   }
 
 
-  // -----  ----- //
+  // ----- BOTTOM CONTAINER ----- //
 
   const bottomContainer = document.createElement('div');
   bottomContainer.id = 'wayfinder-bottomContainer';
@@ -98,36 +97,32 @@ async function renderPortraitWayfinder(container, props) {
   bottomContainer.style.flexDirection = 'row';
   bottomContainer.style.width = '100%';
   bottomContainer.style.height = '35%';
+  bottomContainer.style.backgroundColor = '#211f20';
   mainContainer.appendChild(bottomContainer);
 
   //----- Sensor Container ----- //
 
-  // Lenegd Container
-  // ----- Legend Container ----- //
+  // Legend Container
 
   const legendContainer = document.createElement('div');
   legendContainer.id = 'wayfinder-legendContainer';
+  legendContainer.style.display = 'flex';
   legendContainer.style.width = '10%';
+  legendContainer.style.flexDirection = 'column';
   legendContainer.style.height = '100%';
   legendContainer.style.backgroundColor = '#211f20';
-  legendContainer.style.padding = '1vh';
   legendContainer.style.overflow = 'auto';
-  legendContainer.style.display = 'flex';
-  legendContainer.style.flexDirection = 'column';
+  legendContainer.style.marginRight = '20px';
 
   bottomContainer.appendChild(legendContainer);
-
 
   const legendWrapper = document.createElement('div');
   legendWrapper.style.display = 'flex';
   legendWrapper.style.flexDirection = 'column';
-  legendWrapper.style.gap = '0.77vh';
   legendWrapper.style.flex = '1';
   legendWrapper.style.padding = '1vh';
   legendWrapper.style.overflow = 'auto';
   legendWrapper.style.backgroundColor = '#32313d';
-  legendWrapper.style.borderTopRightRadius = '10px';
-  legendWrapper.style.borderBottomRightRadius = '10px';
 
 
   const legendText = document.createElement('h3');
@@ -137,7 +132,6 @@ async function renderPortraitWayfinder(container, props) {
   legendText.style.fontWeight = '500';
   legendText.style.color = 'white';
   legendText.style.alignSelf = 'flex-start';
-
 
   legendWrapper.appendChild(legendText);
 
@@ -152,34 +146,28 @@ async function renderPortraitWayfinder(container, props) {
       legendItem.style.fontWeight = '500';
       legendItem.style.cursor = 'pointer';
       legendItem.style.borderRadius = '20px';
-      legendItem.style.padding = '2px';
 
       legendItem.innerHTML = legend.name;
 
       legendWrapper.appendChild(legendItem);
     });
-  }
+  };
 
 
   legendContainer.appendChild(legendWrapper);
 
   // -----  ----- //
 
-  //   const titleImage = document.createElement('img');
-  //   titleImage.src = './src/assets/images/logos/the-world-bank-logo.png';
-  //   titleImage.style.width = '50px';
-  //   sensorTitleContainer.appendChild(titleImage);
-
-
   const sensorContainer = document.createElement('div');
   sensorContainer.id = 'wayfinder-sensorContainer';
   sensorContainer.style.width = '70%';
   sensorContainer.style.height = '100%';
+  sensorContainer.style.overflowY = 'scroll';
   bottomContainer.appendChild(sensorContainer);
 
   const sensorTitleContainer = document.createElement('div');
   sensorTitleContainer.id = 'wayfinder-sensorTitle';
-  sensorTitleContainer.style.width = '100%';
+  sensorTitleContainer.style.width = '95%';
   sensorTitleContainer.style.height = '35px';
   sensorTitleContainer.style.display = 'flex';
   sensorTitleContainer.style.padding = '10px';
@@ -187,6 +175,7 @@ async function renderPortraitWayfinder(container, props) {
   sensorTitleContainer.style.justifyContent = 'space-beween';
   sensorTitleContainer.style.alignItems = 'center';
   sensorContainer.appendChild(sensorTitleContainer);
+
 
   //   const titleImage = document.createElement('img');
   //   titleImage.src = './src/assets/images/logos/the-world-bank-logo.png';
@@ -207,8 +196,6 @@ async function renderPortraitWayfinder(container, props) {
   sensorTitleText.style.textAlign = 'left';
 
   sensorTitleContainer.appendChild(sensorTitleText);
-
-
 
 
   //  Time Container
@@ -304,8 +291,7 @@ async function renderPortraitWayfinder(container, props) {
 
   const sensorList = document.createElement('div');
   sensorList.id = 'wayfinder-sensorList';
-  sensorList.style.width = '100%';
-  sensorList.style.height = '60%';
+  sensorList.style.width = '94%';
   sensorList.style.display = 'grid';
   sensorList.style.paddingRight = '20px';
   sensorList.style.paddingLeft = '20px';
@@ -397,11 +383,8 @@ async function renderPortraitWayfinder(container, props) {
   qrCodeSection.style.flexDirection = 'column';
   qrCodeSection.style.alignItems = 'center';
   qrCodeSection.style.justifyContent = 'center';
-  qrCodeSection.style.border = '1px solid red';
+  qrCodeSection.style.backgroundColor = '#32313d';
   bottomContainer.appendChild(qrCodeSection);
-
-
-
 
   // ========== ========== //
 
