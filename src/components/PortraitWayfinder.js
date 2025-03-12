@@ -10,7 +10,7 @@ async function renderPortraitWayfinder(container, props) {
   // ========== Functions ========== //
 
   const handleSensorClick = (sensor) => {
-    let wayfindDuration = 5000;
+    let wayfindDuration = 15000;
     console.log('Sensor clicked:', sensor);
 
     const existingSensorPic = document.getElementById('sensor-overlay'); // Remove Existing Image
