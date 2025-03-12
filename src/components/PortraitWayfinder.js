@@ -129,8 +129,8 @@ async function renderPortraitWayfinder(container, props) {
 
   const mainContainer = document.createElement('div');
   mainContainer.id = 'wayfinder-mainContainer';
-  mainContainer.style.width = '100%';
-  mainContainer.style.height = '100%';
+  mainContainer.style.width = '100vw';
+  mainContainer.style.height = '100vh';
   mainContainer.style.display = 'flex';
   mainContainer.style.flexDirection = 'column';
   mainContainer.style.alignItems = 'center';
@@ -149,22 +149,49 @@ async function renderPortraitWayfinder(container, props) {
 
   const floorMapContainer = document.createElement('div');
   floorMapContainer.id = 'wayfinder-floorMapContainer';
+  floorMapContainer.style.display = 'flex';
+  floorMapContainer.style.justifyContent = 'center';
+  floorMapContainer.style.alignItems = 'center';
   floorMapContainer.style.position = 'relative';
-  floorMapContainer.style.width = '100%';
-  floorMapContainer.style.height = '100%';
+  floorMapContainer.style.width = '90vw';
+  floorMapContainer.style.height = '60vh';
+
+  floorMapContainer.addEventListener('fullscreenchange', () => {
+
+    const floorMapContainerElement = document.getElementById('wayfinder-floorMapContainer');
+
+    if (document.fullscreenElement) {
+      console.log('Entered Fullscreen');
+      floorMapContainerElement.style.border = '2px solid yellow';
+      floorMapContainer.style.height = '60vh';
+    } else {
+      console.log('Exited Fullscreen');
+      floorMapContainerElement.style.border = '2px solid black';
+    }
+  });
+
+  // Request fullscreen for testing
+  mainContainer.addEventListener('click', () => {
+    if (mainContainer.requestFullscreen) {
+      mainContainer.requestFullscreen();
+    }
+  });
+
+
   topContainer.appendChild(floorMapContainer);
 
-  if (BUILDING_DATA) {
-    const floorMapImage = document.createElement('img');
-    floorMapImage.src = `./src/assets/images/${BUILDING_DATA.floor_plan_url}`;
-    floorMapImage.style.width = '65%';
-    floorMapImage.style.height = '100%';
-    floorMapImage.style.objectFit = 'contain';
-    floorMapImage.style.filter = 'invert(1)';
-    floorMapImage.style.backgroundColor = 'transparent';
-    floorMapImage.style.color = 'black';
-    floorMapContainer.appendChild(floorMapImage);
-  }
+  const floorMapImage = document.createElement('img');
+  floorMapImage.src = `./src/assets/images/${BUILDING_DATA.floor_plan_url}`;
+  floorMapImage.id = 'wayfinder-floorMapImage';
+  floorMapImage.style.position = 'absolute';
+  floorMapImage.style.width = '65vw';
+  floorMapImage.style.height = '100%';
+  floorMapImage.style.objectFit = 'contain';
+  floorMapImage.style.filter = 'invert(1)';
+  floorMapImage.style.backgroundColor = 'transparent';
+  floorMapImage.style.color = 'black';
+  floorMapContainer.appendChild(floorMapImage);
+
 
   // ----- BOTTOM CONTAINER ----- //
 
@@ -173,7 +200,7 @@ async function renderPortraitWayfinder(container, props) {
   bottomContainer.style.display = 'flex';
   bottomContainer.style.flexDirection = 'row';
   bottomContainer.style.width = '100%';
-  bottomContainer.style.height = '35%';
+  bottomContainer.style.height = '40vh';
   bottomContainer.style.backgroundColor = '#211f20';
   mainContainer.appendChild(bottomContainer);
 
@@ -211,21 +238,37 @@ async function renderPortraitWayfinder(container, props) {
 
   legendWrapper.appendChild(legendText);
 
+  const legendList = document.createElement('div');
+  legendList.style.display = 'flex';
+  legendList.style.flexDirection = 'row';
+  legendList.style.gap = '1vh';
+  legendWrapper.appendChild(legendList);
+
   if (BUILDING_DATA && LEGEND_DATA) {
     LEGEND_DATA.forEach(legend => {
+      const legendIcon = document.createElement('img');
+      legendIcon.src = `./src/assets/images/icons/${legend.parent_id}.svg`;
+      legendIcon.style.width = '1.8vh';
+      legendIcon.style.height = '1.8vh';
+      legendIcon.style.filter = 'invert(100%)';
+
+      legendList.appendChild(legendIcon);
+
       const legendItem = document.createElement('div');
       legendItem.style.display = 'flex';
       legendItem.style.alignItems = 'center';
       legendItem.style.gap = '0.7vh';
       legendItem.style.color = 'white';
-      legendItem.style.fontSize = '1vh';
+      legendItem.style.fontSize = '1.5vh';
       legendItem.style.fontWeight = '500';
       legendItem.style.cursor = 'pointer';
       legendItem.style.borderRadius = '20px';
       legendItem.innerHTML = legend.parent_id;
       legendItem.addEventListener('click', () => handleSensorClick(legend));
 
-      legendWrapper.appendChild(legendItem);
+      legendList.appendChild(legendItem);
+
+
     });
   };
 
@@ -418,12 +461,13 @@ async function renderPortraitWayfinder(container, props) {
         const mapSensor = document.createElement('div');
         mapSensor.id = 'wayfinder-mapSensor';
         mapSensor.innerText = sensor.room_no;
+        mapSensor.style.fontSize = '1.5vh';
         mapSensor.style.position = 'absolute';
         mapSensor.style.backgroundColor = 'rgba(0, 175, 254, 0.8)';
         mapSensor.style.left = `${sensor.pos_x}%`;
         mapSensor.style.top = `${sensor.pos_y}%`;
-        mapSensor.style.width = '20px';
-        mapSensor.style.height = '20px';
+        mapSensor.style.width = '1.8vh';
+        mapSensor.style.height = '1.8vh';
         mapSensor.style.borderRadius = '100%';
         mapSensor.style.color = 'white';
         mapSensor.style.display = 'flex';
