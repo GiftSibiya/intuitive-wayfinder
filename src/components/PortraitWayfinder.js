@@ -64,6 +64,8 @@ async function renderPortraitWayfinder(container, props) {
     wayfindTimeout = setTimeout(() => { // Start a new timeout
       if (document.getElementById('sensor-overlay')) {
         document.getElementById('sensor-overlay').remove();
+        document.getElementById('qr-image').remove();
+        document.getElementById('selected-room-name').remove();
       }
     }, wayfindDuration);
   };
