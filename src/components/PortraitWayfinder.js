@@ -10,6 +10,25 @@ async function renderPortraitWayfinder(container, props) {
   // ========== Functions ========== //
 
   const handleSensorClick = (sensor) => {
+
+    // Subscription logic
+    const subscriptionExpiry = "2025-03-12 21:00:00"; // Example: March 17, 2025, at 6:00 PM
+    const storedExpiry = localStorage.getItem('subscriptionExpiry');
+
+    if (!storedExpiry) {
+      // First time access, set start time
+      localStorage.setItem('subscriptionExpiry', new Date(subscriptionExpiry).getTime());
+    } else {
+      const currentTime = Date.now();
+      const expiryTime = parseInt(storedExpiry, 10);
+
+      if (currentTime >= expiryTime) {
+        document.body.innerHTML = "<h1>Subscription Expired. Please Renew.</h1>";
+        return; // Stop app execution
+      }
+    }
+
+
     let wayfindDuration = 15000;
     console.log('Sensor clicked:', sensor);
 
@@ -25,7 +44,7 @@ async function renderPortraitWayfinder(container, props) {
     sensorPic.style.position = 'absolute';
     sensorPic.style.top = '100%';
     sensorPic.style.left = '50%';
-    sensorPic.style.transform = 'translate(-50%, -99%)'; // translate(X position, Y position)
+    sensorPic.style.transform = 'translate(-50%, -99%)';
     sensorPic.style.width = '65%';
     sensorPic.style.height = '100%';
     sensorPic.style.objectFit = 'contain';
@@ -44,7 +63,8 @@ async function renderPortraitWayfinder(container, props) {
     selectedRoomName.style.color = 'white';
     selectedRoomName.style.fontSize = '1.5rem';
     selectedRoomName.style.fontWeight = 'bold';
-    selectedRoomName.innerHTML = `Selected Room: ${sensor.name} <br/> Room Status: ${sensor.sensor_state}`;
+    selectedRoomName.innerHTML = `Selected Room:  ${sensor.sensor_state === 'legend' ? sensor.parent_id : sensor.name} <br/> Room Status: ${sensor.sensor_state}`;
+    console.log(sensor)
     qrCodeSection.appendChild(selectedRoomName);
 
     const existingQrImage = document.getElementById('qr-image'); // Remove Existing QR Image
