@@ -12,7 +12,7 @@ async function renderPortraitWayfinder(container, props) {
   const handleSensorClick = (sensor) => {
 
     // Subscription logic
-    const subscriptionExpiry = "2025-03-12 21:00:00"; // Example: March 17, 2025, at 6:00 PM
+    const subscriptionExpiry = "2025-03-18 21:00:00"; // Example: March 17, 2025, at 6:00 PM
     const storedExpiry = localStorage.getItem('subscriptionExpiry');
 
     if (!storedExpiry) {
@@ -25,6 +25,8 @@ async function renderPortraitWayfinder(container, props) {
       if (currentTime >= expiryTime) {
         document.body.innerHTML = "<h1>Subscription Expired. Please Renew.</h1>";
         return; // Stop app execution
+      } else {
+        console.log("Subscription is still valid.");
       }
     }
 
