@@ -174,7 +174,7 @@ async function renderPortraitWayfinder(container, props) {
   topContainer.style.display = 'flex';
   topContainer.style.justifyContent = 'center';
   topContainer.style.alignItems = 'center';
-  topContainer.style.backgroundColor = 'grey';
+  topContainer.style.backgroundColor = 'black';
   mainContainer.appendChild(topContainer);
 
   const floorMapContainer = document.createElement('div');
@@ -185,14 +185,12 @@ async function renderPortraitWayfinder(container, props) {
   floorMapContainer.style.position = 'relative';
   floorMapContainer.style.width = '100vw';
   floorMapContainer.style.height = '100%';
-  floorMapContainer.style.border = '2px solid red';
 
   floorMapContainer.addEventListener('fullscreenchange', () => {
     const floorMapContainerElement = document.getElementById('wayfinder-floorMapContainer');
 
     if (document.fullscreenElement) {
       console.log('Entered Fullscreen');
-      floorMapContainerElement.style.border = '2px solid yellow';
       floorMapContainer.style.height = '60vh';
     } else {
       console.log('Exited Fullscreen');
@@ -222,7 +220,6 @@ async function renderPortraitWayfinder(container, props) {
   floorMapImage.style.backgroundColor = 'transparent';
   floorMapImage.style.color = 'black';
   floorMapImage.style.zIndex = '0';
-  floorMapImage.style.border = '2px solid red';
   floorMapContainer.appendChild(floorMapImage);
 
   const floorMapOverlay = document.createElement('img');
@@ -239,7 +236,6 @@ async function renderPortraitWayfinder(container, props) {
   floorMapOverlay.style.backgroundColor = 'transparent';
   floorMapOverlay.style.color = 'black';
   floorMapOverlay.style.zIndex = '1';
-  floorMapOverlay.style.border = '2px solid yellow';
   floorMapImage.appendChild(floorMapOverlay);
 
 
