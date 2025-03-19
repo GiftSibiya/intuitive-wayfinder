@@ -507,7 +507,7 @@ async function renderPortraitWayfinder(container, props) {
         sensorListItem.appendChild(sensorItem);
         // ----- ----- //
 
-        // ----- Map Senors ----- //
+        // ----- Map Senors wanda----- //
         const mapSensor = document.createElement('div');
         mapSensor.id = 'wayfinder-mapSensor';
         mapSensor.innerText = sensor.room_no;
