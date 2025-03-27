@@ -7,16 +7,13 @@ async function renderPortraitWayfinder(container, props) {
   let BUILDING_DATA = window.sensorData;
   let SENSOR_DATA = window.sensorData.sensors.filter(sensor => sensor.sensor_state !== 'legend');
   let LEGEND_DATA = window.sensorData.sensors.filter(sensor => sensor.sensor_state === 'legend');
-  const width = window.innerWidth;
-  const height = window.innerHeight;
-  console.log(`Current Screen Resolution: ${width} x ${height}`);
   // ========== Functions ========== //
 
   const handleSensorClick = (sensor) => {
 
 
     // Subscription logic
-    const subscriptionExpiry = "2026-04-30 23:00:00";
+    const subscriptionExpiry = "2025-04-30 23:00:00";
     const storedExpiry = localStorage.getItem('subscriptionExpiry');
     localStorage.clear();
 
@@ -31,13 +28,13 @@ async function renderPortraitWayfinder(container, props) {
         document.body.innerHTML = "<h1>Subscription Expired. Please Renew.</h1>";
         return; // Stop app execution
       } else {
-        console.log("Subscription is still valid.");
+        // console.log("Subscription is still valid.");
       }
     }
 
 
     let wayfindDuration = 15000;
-    console.log('Sensor clicked:', sensor);
+    // console.log('Sensor clicked:', sensor);
 
     const existingSensorPic = document.getElementById('sensor-overlay'); // Remove Existing Image
     if (existingSensorPic) {
@@ -71,7 +68,7 @@ async function renderPortraitWayfinder(container, props) {
     selectedRoomName.style.fontSize = '1.5rem';
     selectedRoomName.style.fontWeight = 'bold';
     selectedRoomName.innerHTML = `Selected Room:  ${sensor.sensor_state === 'legend' ? sensor.parent_id : sensor.name} <br/> Room Status: ${sensor.sensor_state}`;
-    console.log(sensor)
+    // console.log(sensor)
     qrCodeSection.appendChild(selectedRoomName);
 
     const existingQrImage = document.getElementById('qr-image'); // Remove Existing QR Image
@@ -190,10 +187,10 @@ async function renderPortraitWayfinder(container, props) {
     const floorMapContainerElement = document.getElementById('wayfinder-floorMapContainer');
 
     if (document.fullscreenElement) {
-      console.log('Entered Fullscreen');
+      // console.log('Entered Fullscreen');
       floorMapContainer.style.height = '60vh';
     } else {
-      console.log('Exited Fullscreen');
+      // console.log('Exited Fullscreen');
       floorMapContainerElement.style.border = '2px solid black';
     }
   });
