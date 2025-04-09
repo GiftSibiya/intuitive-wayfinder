@@ -49,9 +49,9 @@ async function renderPortraitWayfinder(container, props) {
     sensorPic.style.top = '100%';
     sensorPic.style.left = '50%';
     sensorPic.style.transform = 'translate(-50%, -100%)';
-    sensorPic.style.width = '65%';
+    sensorPic.style.width = '40%';
     sensorPic.style.height = '100%';
-    sensorPic.style.objectFit = 'contain';
+    sensorPic.style.objectFit = '';
     sensorPic.style.backgroundColor = 'transparent';
     sensorPic.style.pointerEvents = 'none';
 
