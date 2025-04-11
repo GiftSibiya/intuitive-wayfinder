@@ -90,14 +90,18 @@ async function renderPortraitWayfinder(container, props) {
         document.getElementById('sensor-overlay').remove();
         document.getElementById('qr-image').remove();
         document.getElementById('selected-room-name').remove();
+        // Clear the search input
+        const searchInput = document.getElementById('wayfinder-searchInput');
+        if (searchInput) {
+          searchInput.value = '';
+          filterSensors(''); // Reset the sensor list
+        }
       }
     }, wayfindDuration);
   };
 
   const filterSensors = (query) => {
-    let sensotData = SENSOR_DATA;
-
-    const filteredSensors = sensotData.sensors.filter(sensor =>
+    const filteredSensors = SENSOR_DATA.filter(sensor =>
       sensor.name.toLowerCase().includes(query.toLowerCase())
     );
     updateSensorList(filteredSensors);
