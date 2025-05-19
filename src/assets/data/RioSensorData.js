@@ -10,8 +10,8 @@ window.sensorData =
   "building": "Central Park",
   "ordinal_no": "14th",
   "occupancy_limit": 156,
-  "floor_plan": "ifWdpNB73bZNGLDPJem4o5JwBHCK16chX44rycOL.png",
-  "floor_plan_url": "/plans/ifWdpNB73bZNGLDPJem4o5JwBHCK16chX44rycOL.png",
+  "floor_plan": "floorplan.png",
+  "floor_plan_url": "/plans/floorplan.png",
   "areas": [
     {
       "building_id": "d8307aa9-0441-4222-aa2e-9c6fbbe9bf60",
@@ -722,9 +722,9 @@ window.sensorData =
     },
     {
       "id": "8a388d4a-1d49-46a9-a241-2bf7cf1f5c07",
-      "name": "rio_14_bathroom",
-      "parent": "rio_14_bathroom",
-      "sensor_id": "rio_14_bathroom",
+      "name": "bathrooms",
+      "parent": "bathrooms",
+      "sensor_id": "bathrooms",
       "parent_id": "Bathrooms",
       "pos_x": 1000,
       "pos_y": 1000,

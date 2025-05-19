@@ -13,7 +13,7 @@ async function renderPortraitWayfinder(container, props) {
 
 
     // Subscription logic
-    const subscriptionExpiry = "2025-04-30 23:00:00";
+    const subscriptionExpiry = "2026-04-30 23:00:00";
     const storedExpiry = localStorage.getItem('subscriptionExpiry');
     localStorage.clear();
 
@@ -49,7 +49,8 @@ async function renderPortraitWayfinder(container, props) {
     sensorPic.style.top = '100%';
     sensorPic.style.left = '50%';
     sensorPic.style.transform = 'translate(-50%, -100%)';
-    sensorPic.style.width = '40%';
+    sensorPic.style.border = '2px solid black';
+    sensorPic.style.width = '60%';
     sensorPic.style.height = '100%';
     sensorPic.style.objectFit = '';
     sensorPic.style.backgroundColor = 'transparent';
@@ -110,9 +111,6 @@ async function renderPortraitWayfinder(container, props) {
   const updateSensorList = (sensors) => {
     sensorList.innerHTML = ''; // Clear the existing list
     sensors.forEach(sensor => {
-
-
-
       const sensorListItem = document.createElement('div');
       sensorListItem.id = 'wayfinder-sensorListItem';
       sensorListItem.style.display = 'flex';
@@ -120,6 +118,11 @@ async function renderPortraitWayfinder(container, props) {
       sensorListItem.style.alignContent = 'center';
       sensorListItem.style.width = '100%';
       sensorListItem.style.height = '30px';
+      sensorListItem.style.border = '2px solid white';
+      sensorListItem.style.borderRadius = '5px';
+      sensorListItem.style.backgroundColor = '#FFD700';
+      sensorListItem.style.marginBottom = '5px';
+      sensorListItem.style.padding = '5px';
       sensorListItem.addEventListener('click', () => handleSensorClick(sensor));
       sensorList.appendChild(sensorListItem);
 
@@ -215,7 +218,7 @@ async function renderPortraitWayfinder(container, props) {
   floorMapImage.style.justifyContent = 'center';
   floorMapImage.style.alignItems = 'center';
   floorMapImage.style.position = 'relative';
-  floorMapImage.style.width = '38%';
+  floorMapImage.style.width = '60%';
   floorMapImage.style.height = '100%';
   floorMapImage.style.objectFit = 'contain';
   floorMapImage.style.backgroundColor = 'transparent';
@@ -233,7 +236,8 @@ async function renderPortraitWayfinder(container, props) {
   floorMapOverlay.style.width = '100%';
   floorMapOverlay.style.height = '100%';
   floorMapOverlay.style.objectFit = 'fill';
-  floorMapOverlay.style.filter = 'invert(1)';
+
+  // floorMapOverlay.style.filter = 'invert(1)';
   floorMapOverlay.style.backgroundColor = 'transparent';
   floorMapOverlay.style.color = 'black';
   floorMapOverlay.style.zIndex = '1';
@@ -473,6 +477,11 @@ async function renderPortraitWayfinder(container, props) {
         sensorListItem.style.alignContent = 'center';
         sensorListItem.style.width = '100%';
         sensorListItem.style.height = '30px';
+        sensorListItem.style.border = '2px solid white';
+        sensorListItem.style.borderRadius = '5px';
+        sensorListItem.style.backgroundColor = '#FFD700';
+        sensorListItem.style.marginBottom = '5px';
+        sensorListItem.style.padding = '5px';
         sensorListItem.addEventListener('click', () => handleSensorClick(sensor));
         sensorList.appendChild(sensorListItem);
 
@@ -497,14 +506,14 @@ async function renderPortraitWayfinder(container, props) {
         sensorItem.style.display = 'flex';
         sensorItem.style.color = 'white';
         sensorItem.style.flexDirection = 'row';
-        sensorItem.style.width = '50%';
+        sensorItem.style.width = '60%';
         sensorItem.style.fontSize = '12px';
         sensorItem.style.marginLeft = '12px';
         sensorItem.style.height = '45px';
         sensorListItem.appendChild(sensorItem);
         // ----- ----- //
 
-        // ----- Map Senors wanda----- //
+        // ----- Map Senors ----- //
         const mapSensor = document.createElement('div');
         mapSensor.id = 'wayfinder-mapSensor';
         mapSensor.innerText = sensor.room_no;
