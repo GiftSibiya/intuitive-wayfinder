@@ -13,7 +13,7 @@ async function renderPortraitWayfinder(container, props) {
 
 
     // Subscription logic
-    const subscriptionExpiry = "2025-04-30 23:00:00";
+    const subscriptionExpiry = "2055-04-30 23:00:00";
     const storedExpiry = localStorage.getItem('subscriptionExpiry');
     localStorage.clear();
 
