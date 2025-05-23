@@ -548,7 +548,7 @@ async function renderPortraitWayfinder(container, props) {
       invisibleSensor.style.position = 'absolute';
       invisibleSensor.style.left = `${sensor.pos_x - 0.9}%`;
       invisibleSensor.style.top = `${sensor.pos_y}%`;
-      invisibleSensor.style.width = '5vh'; // Landscape
+      invisibleSensor.style.width = '7vh'; // Landscape
       invisibleSensor.style.height = '5vh'; // Landscape
       // invisibleSensor.style.backgroundColor = 'rgb(5, 5, 5)';
       invisibleSensor.style.zIndex = '20';
