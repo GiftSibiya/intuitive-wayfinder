@@ -54,8 +54,7 @@ async function renderPortraitWayfinder(container, props) {
     sensorPic.style.top = '100%';
     sensorPic.style.left = '50%';
     sensorPic.style.transform = 'translate(-50%, -100%)';
-    // sensorPic.style.width = '100%'; Landscape
-    sensorPic.style.width = '100%'; // Portrait
+    sensorPic.style.width = '100%';
     sensorPic.style.height = '100%';
     sensorPic.style.objectFit = '';
     sensorPic.style.backgroundColor = 'transparent';
@@ -163,8 +162,8 @@ async function renderPortraitWayfinder(container, props) {
   const topContainer = document.createElement('div');
   topContainer.id = 'wayfinder-topContainer';
   topContainer.style.width = '100%'; // Landscape
-  // topContainer.style.height = '30%'; // Portrait
-  topContainer.style.height = '70%'; // Landscape
+  topContainer.style.height = '30%'; // Portrait
+  // topContainer.style.height = '70%'; // Landscape
   topContainer.style.margin = '0px 50px';
   topContainer.style.display = 'flex';
   topContainer.style.justifyContent = 'center';
@@ -210,7 +209,6 @@ async function renderPortraitWayfinder(container, props) {
   floorMapImage.style.alignItems = 'center';
   floorMapImage.style.position = 'relative';
   floorMapImage.style.width = '100%'; // Landscape
-  floorMapImage.style.width = '100%'; // Portrait
   floorMapImage.style.height = '100%';
   floorMapImage.style.objectFit = 'contain';
   floorMapImage.style.backgroundColor = 'transparent';
@@ -241,8 +239,9 @@ async function renderPortraitWayfinder(container, props) {
   bottomContainer.style.display = 'flex';
   bottomContainer.style.flexDirection = 'row';
   bottomContainer.style.width = '100%';
-  // bottomContainer.style.height = '80vh';
-  bottomContainer.style.height = '30vh';
+  bottomContainer.style.overflow = 'hidden';
+  bottomContainer.style.height = '80vh';
+  // bottomContainer.style.height = '30vh';
   bottomContainer.style.backgroundColor = '#211f20';
   mainContainer.appendChild(bottomContainer);
 
@@ -273,8 +272,7 @@ async function renderPortraitWayfinder(container, props) {
   const legendText = document.createElement('h3');
   legendText.textContent = 'Legend';
   legendText.style.padding = '1vh';
-  // legendText.style.fontSize = '1vh'; // Portrait
-  legendText.style.fontSize = '2vh'; // Landscape
+  legendText.style.fontSize = '1vh'; // Portrait
   legendText.style.fontWeight = '500';
   legendText.style.color = 'white';
   legendText.style.alignSelf = 'flex-start';
@@ -294,8 +292,8 @@ async function renderPortraitWayfinder(container, props) {
       legendItem.style.alignItems = 'center';
       legendItem.style.gap = '0.7vh';
       legendItem.style.color = 'white';
-      // legendItem.style.fontSize = '1vh'; // Portrait
-      legendItem.style.fontSize = '1.5vh'; // Landscape
+      legendItem.style.fontSize = '0.71vh'; // Portrait
+      // legendItem.style.fontSize = '1.5vh'; // Landscape
       legendItem.style.fontWeight = '500';
       legendItem.style.cursor = 'pointer';
       legendItem.style.borderRadius = '20px';
@@ -328,7 +326,7 @@ async function renderPortraitWayfinder(container, props) {
   sensorContainer.id = 'wayfinder-sensorContainer';
   sensorContainer.style.width = '100%';
   sensorContainer.style.height = '100%';
-  sensorContainer.style.overflowY = 'scroll';
+  // sensorContainer.style.overflowY = 'scroll';
   bottomContainer.appendChild(sensorContainer);
 
   const sensorTitleContainer = document.createElement('div');
