@@ -172,6 +172,27 @@ async function renderPortraitWayfinder(container, props) {
   topContainer.style.backgroundColor = 'white';
   mainContainer.appendChild(topContainer);
 
+  const logoContainer = document.createElement('div');
+  logoContainer.id = 'wayfinder-logoContainer';
+  logoContainer.style.display = 'flex';
+  logoContainer.style.position = 'absolute';
+  logoContainer.style.top = '0';
+  logoContainer.style.left = '0';
+  logoContainer.style.margin = '10px';
+  logoContainer.style.justifyContent = 'center';
+  logoContainer.style.zIndex = '100';
+  logoContainer.style.alignItems = 'center';
+  logoContainer.style.height = '50px';
+  topContainer.appendChild(logoContainer);
+
+  const logo = document.createElement('img');
+  logo.src = `./src/assets/images/logos/logo.png`;
+  logo.style.objectFit = 'fill';
+  logo.id = 'wayfinder-logo';
+  logo.style.width = '100%';
+  logo.style.height = '100%';
+  logoContainer.appendChild(logo);
+
   const floorMapContainer = document.createElement('div');
   floorMapContainer.id = 'wayfinder-floorMapContainer';
   floorMapContainer.style.display = 'flex';
