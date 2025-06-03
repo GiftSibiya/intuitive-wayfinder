@@ -11,6 +11,7 @@ async function renderPortraitWayfinder(container, props) {
   let LEGEND_DATA = window.sensorData.sensors.filter(sensor => sensor.sensor_state === 'legend' && sensor.hideOnLive === false);
   let INVISIBLE_LIST_ITEMS = window.sensorData.sensors.filter(sensor => sensor.sensor_state === 'invisible' && sensor.hideOnLive === false);
   let INVISIBLE_MAP_ITEMS = window.sensorData.sensors.filter(sensor => sensor.hideOnLive === true);
+  let searchTimeout;
 
   // ========== Functions ========== //
 
@@ -394,10 +395,28 @@ async function renderPortraitWayfinder(container, props) {
 
   const timeText = document.createElement('div');
   timeText.id = 'wayfinder-timeText';
+
+  function updateTime() {
+    const now = new Date();
+    const hour = now.getHours();
+    const ampm = hour >= 12 ? 'pm' : 'am';
+    const hour12 = hour % 12 === 0 ? 12 : hour % 12;
+    const minutes = now.getMinutes().toString().padStart(2, '0');
+    const seconds = now.getSeconds().toString().padStart(2, '0');
+    timeText.textContent = `${hour12}:${minutes}:${seconds} ${ampm}`;
+  }
+
+  // Initial update
+  updateTime();
+
+  // Update every second
+  setInterval(updateTime, 1000);
+
   const hour = new Date().getHours();
   const ampm = hour >= 12 ? 'pm' : 'am';
   const hour12 = hour % 12 === 0 ? 12 : hour % 12;
   timeText.textContent = `${hour12}:${new Date().getMinutes().toString().padStart(2, '0')} ${ampm}`;
+
   Object.assign(timeText.style, {
     color: '#ffffff',
     fontWeight: 'bold',
@@ -461,6 +480,17 @@ async function renderPortraitWayfinder(container, props) {
 
   searchInput.addEventListener('input', (event) => {
     filterSensors(event.target.value);
+
+    // Clear any existing timeout
+    if (searchTimeout) {
+      clearTimeout(searchTimeout);
+    }
+
+    // Set new timeout to reset after 15 seconds
+    searchTimeout = setTimeout(() => {
+      searchInput.value = '';
+      filterSensors('');
+    }, 15000);
   });
 
   searchContainer.appendChild(searchInput);
