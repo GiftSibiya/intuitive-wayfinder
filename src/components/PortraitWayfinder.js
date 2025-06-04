@@ -9,7 +9,7 @@ async function renderPortraitWayfinder(container, props) {
   let ALL_SENSOR_DATA = window.sensorData.sensors.filter(sensor => sensor.sensor_state !== 'legend' && sensor.hideOnLive === false && sensor.dubplicate === false);
   let SENSOR_DATA = window.sensorData.sensors.filter(sensor => sensor.sensor_state !== 'legend' && sensor.sensor_state !== 'invisible' && sensor.hideOnLive === false);
   let DUPLICATE_SENSOR_DATA = window.sensorData.sensors.filter(sensor => sensor.sensor_state !== 'legend' && sensor.sensor_state !== 'invisible' && sensor.hideOnLive === false && sensor.dubplicate === true);
-  let LEGEND_DATA = window.sensorData.sensors.filter(sensor => sensor.sensor_state === 'legend' && sensor.hideOnLive === false);
+  let LEGEND_DATA = window.sensorData.sensors.filter(sensor => sensor.sensor_state === 'legend' && sensor.hideOnLive === false && sensor.dubplicate === false);
   let INVISIBLE_LIST_ITEMS = window.sensorData.sensors.filter(sensor => sensor.sensor_state === 'invisible' && sensor.hideOnLive === false);
   let INVISIBLE_MAP_ITEMS = window.sensorData.sensors.filter(sensor => sensor.hideOnLive === true);
   let searchTimeout;
@@ -600,8 +600,8 @@ async function renderPortraitWayfinder(container, props) {
       invisibleSensor.style.position = 'absolute';
       invisibleSensor.style.left = `${sensor.pos_x - 0.9}%`;
       invisibleSensor.style.top = `${sensor.pos_y}%`;
-      invisibleSensor.style.width = '5vh'; // Landscape
-      invisibleSensor.style.height = '5vh'; // Landscape
+      invisibleSensor.style.width = '7vh'; // Landscape
+      invisibleSensor.style.height = '5.8vh'; // Landscape
       // invisibleSensor.style.backgroundColor = 'rgb(5, 5, 5)';
       invisibleSensor.style.zIndex = '20';
       invisibleSensor.style.cursor = 'pointer';
@@ -617,8 +617,8 @@ async function renderPortraitWayfinder(container, props) {
       invisibleSensor.style.position = 'absolute';
       invisibleSensor.style.left = `${sensor.pos_x - 0.9}%`;
       invisibleSensor.style.top = `${sensor.pos_y}%`;
-      invisibleSensor.style.width = '3vh'; // Landscape
-      invisibleSensor.style.height = '3vh'; // Landscape
+      invisibleSensor.style.width = '4vh'; // Landscape
+      invisibleSensor.style.height = '4vh'; // Landscape
       invisibleSensor.style.zIndex = '20';
       invisibleSensor.style.cursor = 'pointer';
       // invisibleSensor.style.backgroundColor = 'rgb(16, 160, 124)';
