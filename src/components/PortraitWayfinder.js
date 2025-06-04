@@ -8,7 +8,7 @@ async function renderPortraitWayfinder(container, props) {
   let BUILDING_DATA = window.sensorData.sensors.filter(sensor => sensor.sensor_state === 'available' && sensor.hideOnLive === false);
   let ALL_SENSOR_DATA = window.sensorData.sensors.filter(sensor => sensor.sensor_state !== 'legend' && sensor.hideOnLive === false && sensor.dubplicate === false);
   let SENSOR_DATA = window.sensorData.sensors.filter(sensor => sensor.sensor_state !== 'legend' && sensor.sensor_state !== 'invisible' && sensor.hideOnLive === false);
-  let LEGEND_DATA = window.sensorData.sensors.filter(sensor => sensor.sensor_state === 'legend' && sensor.hideOnLive === false);
+  let LEGEND_DATA = window.sensorData.sensors.filter(sensor => sensor.sensor_state === 'legend' && sensor.hideOnLive === false && sensor.dubplicate === false);
   let INVISIBLE_LIST_ITEMS = window.sensorData.sensors.filter(sensor => sensor.sensor_state === 'invisible' && sensor.hideOnLive === false);
   let INVISIBLE_MAP_ITEMS = window.sensorData.sensors.filter(sensor => sensor.hideOnLive === true);
   let searchTimeout;
