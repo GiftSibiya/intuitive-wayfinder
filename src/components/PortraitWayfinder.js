@@ -12,7 +12,6 @@ async function renderPortraitWayfinder(container, props) {
   let LEGEND_DATA = window.sensorData.sensors.filter(sensor => sensor.sensor_state === 'legend' && sensor.hideOnLive === false && sensor.dubplicate === false);
   let INVISIBLE_LIST_ITEMS = window.sensorData.sensors.filter(sensor => sensor.sensor_state === 'invisible' && sensor.hideOnLive === false);
   let INVISIBLE_MAP_ITEMS = window.sensorData.sensors.filter(sensor => sensor.hideOnLive === true);
-  let searchTimeout;
 
   // ========== Functions ========== //
 
@@ -82,70 +81,10 @@ async function renderPortraitWayfinder(container, props) {
         document.getElementById('sensor-overlay').remove();
         document.getElementById('qr-image').remove();
         document.getElementById('selected-room-name').remove();
-        // Clear the search input
-        const searchInput = document.getElementById('wayfinder-searchInput');
-        if (searchInput) {
-          searchInput.value = '';
-          filterSensors(''); // Reset the sensor list
-        }
       }
     }, wayfindDuration);
   };
 
-  const filterSensors = (query) => {
-    const filteredSensors = ALL_SENSOR_DATA.filter(sensor =>
-      sensor.name.toLowerCase().includes(query.toLowerCase())
-    );
-    updateSensorList(filteredSensors);
-  };
-
-  const updateSensorList = (sensors) => {
-    sensorList.innerHTML = ''; // Clear the existing list
-    sensors.forEach(sensor => {
-      const sensorListItem = document.createElement('div');
-      sensorListItem.id = 'wayfinder-sensorListItem';
-      sensorListItem.style.display = 'flex';
-      sensorListItem.style.flexDirection = 'row';
-      sensorListItem.style.alignContent = 'center';
-      sensorListItem.style.width = '90%';
-      sensorListItem.style.height = '30px';
-      sensorListItem.style.border = '2px solid white';
-      sensorListItem.style.borderRadius = '5px';
-      // sensorListItem.style.backgroundColor = '#FFD700';
-      sensorListItem.style.marginBottom = '5px';
-      sensorListItem.style.padding = '5px';
-      sensorListItem.addEventListener('click', () => handleSensorClick(sensor));
-      sensorList.appendChild(sensorListItem);
-
-      const sensorNumber = document.createElement('div');
-      sensorNumber.textContent = sensor.room_no;
-      sensorNumber.id = 'wayfinder-sensorNumber';
-      sensorNumber.style.backgroundColor = 'red';
-      sensorNumber.style.display = 'flex';
-      sensorNumber.style.justifyContent = 'center';
-      sensorNumber.style.alignItems = 'center';
-      sensorNumber.style.width = '20px';
-      sensorNumber.style.height = '20px';
-      sensorNumber.style.fontSize = '12px';
-      sensorNumber.style.color = 'white';
-      sensorNumber.style.borderRadius = '100%';
-
-      sensorListItem.appendChild(sensorNumber);
-
-      const sensorItem = document.createElement('div');
-      sensorItem.id = 'wayfinder-sensorItem';
-      sensorItem.textContent = sensor.name;
-      sensorItem.style.display = 'flex';
-      sensorItem.style.color = 'white';
-      sensorItem.style.flexDirection = 'row';
-      sensorItem.style.width = '50%';
-      sensorItem.style.fontSize = '12px';
-      sensorItem.style.marginLeft = '12px';
-      sensorItem.style.height = '45px';
-      sensorListItem.appendChild(sensorItem);
-
-    });
-  };
 
   // ========== ========== //
 
@@ -443,58 +382,6 @@ async function renderPortraitWayfinder(container, props) {
 
   // -----  ----- //
 
-  // ----- Search Container ----- //
-
-  const searchContainer = document.createElement('div');
-  searchContainer.id = 'wayfinder-searchContainer';
-  searchContainer.style.width = '100%';
-  searchContainer.style.marginBottom = '20px'; // Taken from .layout-map__search
-  searchContainer.style.display = 'flex';
-  searchContainer.style.flexDirection = 'column';
-  searchContainer.style.alignItems = 'center';
-  searchContainer.style.justifyContent = 'center';
-
-  sensorContainer.appendChild(searchContainer);
-
-  const searchInput = document.createElement('input');
-  searchInput.id = 'wayfinder-searchInput';
-  searchInput.type = 'text';
-  searchInput.placeholder = 'Search room name...';
-  searchInput.style.width = '95%';
-  searchInput.style.height = '35px';
-  searchInput.style.padding = '5px';
-  searchInput.style.border = '1px solid #ccc';
-  searchInput.style.borderRadius = '50px';
-  searchInput.style.backgroundColor = '#32313d';
-  searchInput.style.color = '#ffffff';
-  searchInput.style.fontSize = '16px';
-  searchInput.style.textAlign = 'left';
-  searchInput.style.outline = 'none';
-  searchInput.style.caretColor = '#ffffff';
-
-  searchInput.addEventListener('focus', () => {
-    searchInput.placeholder = '';
-  });
-  searchInput.addEventListener('blur', () => {
-    searchInput.placeholder = 'Search room name...';
-  });
-
-  searchInput.addEventListener('input', (event) => {
-    filterSensors(event.target.value);
-
-    // Clear any existing timeout
-    if (searchTimeout) {
-      clearTimeout(searchTimeout);
-    }
-
-    // Set new timeout to reset after 15 seconds
-    searchTimeout = setTimeout(() => {
-      searchInput.value = '';
-      filterSensors('');
-    }, 15000);
-  });
-
-  searchContainer.appendChild(searchInput);
 
   // -----  ----- //
 
